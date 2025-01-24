@@ -1,0 +1,35 @@
+# IDE 설정 파일
+.vscode/
+.vs/
+.idea/
+.vsidx/
+
+# 빌드 출력
+bin/
+obj/
+
+# Visual Studio 설정 파일
+*.suo
+*.user
+
+# 환경 설정 파일
+.env
+Local.settings.json
+
+# 캐시 및 로그 파일
+npm-cache/
+*.log
+*.tmp
+
+# 테스트 결과 파일
+test-results/
+
+# 개인 설정 파일
+.gitconfig
+editorconfig
+appsettings.Development.json
+appsettings.json
+
+
+*.map
+
