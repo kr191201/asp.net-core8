@@ -1,0 +1,29 @@
+﻿@model TblBoardList
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="CreateBoard" class="" method="post">
+    <div class="form-row">
+        <div class="col-md-6">
+            <label for="title">제목</label>
+            <input asp-for="BOARD_TITLE" type="text" class="form-control" id="BOARD_TITLE">
+            <span asp-validation-for="BOARD_TITLE" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="writer">작성자</label>
+            <input type="text" class="form-control" id="BOARD_WRITE_NM">
+            <span asp-validation-for="BOARD_WRITE_NM" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="content">내용</label>
+        <textarea class="form-control" id="content" rows="3" id="BOARD_BODY"></textarea>
+        <span asp-validation-for="BOARD_BODY" class="text-danger"></span>
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">
+    </div>
+</form>
