@@ -119,7 +119,7 @@ namespace BoardStudy.Controllers
         [HttpGet]
         public IActionResult GetUserInfo()
         {
-            if (User.Identity.IsAuthenticated) { 
+            if (User.Identity.IsAuthenticated) { // 여기에서 true로 실행됨
                 // 1. 사용자 ID 추출
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
 

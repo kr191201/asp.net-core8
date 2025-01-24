@@ -101,6 +101,7 @@ async function fn_goChart() {
     }
 }
 
+// 로그인 버튼을 누르면 실행되는 이벤트
 async function fn_loginProc() {
     var USEREMAIL = $("#USEREMAIL").val();
     var USERPASSWORD = $("#USERPASSWORD").val();
@@ -138,7 +139,7 @@ async function fn_loginProc() {
 
         //window.location.href = "/Home/Index";
         //window.location.href = "/Board/Index2";
-        fn_GetUserInfo();
+        fn_GetUserInfo(); // 로그인 성공 시 사용자 정보 가져오기
         //window.location.href = '/Home/Index';
     } else {
         console.error('Login failed');
@@ -157,7 +158,7 @@ async function fn_GetUserInfo() {
 
     if (response.ok) {
         const data = await response.json();
-        if (data && data.isAuthenticated) {
+        if (data && data.isAuthenticated) { // 인증까지 성공
             // 인증된 경우, /Home/Index로 페이지 이동
             window.location.href = '/Home/Index';
         } else {
