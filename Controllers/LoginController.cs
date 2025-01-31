@@ -36,7 +36,7 @@ namespace BoardStudy.Controllers
          * 로그인처리
          */
         [HttpPost]
-		public IActionResult proc([FromBody] LoginModel model)
+		public IActionResult Proc([FromBody] LoginModel model)
         {
             try
             {
@@ -54,15 +54,15 @@ namespace BoardStudy.Controllers
 				if (result == 1)
                 {
                     var token = GenerateToken(model);
-                    
+
                     // JWT를 쿠키에 저장
-                    //var cookieOptions = new CookieOptions
-                    //{
-                    //    HttpOnly = true,
-                    //    Expires = DateTimeOffset.UtcNow.AddHours(1),
-                    //    IsEssential = true // 필수 쿠키로 설정
-                    //};
-                    //Response.Cookies.Append("jwt", token, cookieOptions);
+                    var cookieOptions = new CookieOptions
+                    {
+                        HttpOnly = true,
+                        Expires = DateTimeOffset.UtcNow.AddHours(1),
+                        IsEssential = true // 필수 쿠키로 설정
+                    };
+                    Response.Cookies.Append("jwt", token, cookieOptions);
 
                     return Ok(new { Token = token });
                 }
@@ -96,7 +96,6 @@ namespace BoardStudy.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, model.USEREMAIL),
-                new Claim(ClaimTypes.Name, "홍길동")
             };
 
             var token = new JwtSecurityToken(
@@ -119,8 +118,8 @@ namespace BoardStudy.Controllers
         [HttpGet]
         public IActionResult GetUserInfo()
         {
-            if (User.Identity.IsAuthenticated) { // 여기에서 true로 실행됨
-                // 1. 사용자 ID 추출
+            if (User.Identity.IsAuthenticated)
+            {
                 var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
 
                 var userName = User.Identity.Name;
@@ -132,12 +131,14 @@ namespace BoardStudy.Controllers
 
                 var result = _connection.Query<TblUserList>("USP_USER_INFO", parameters, commandType: CommandType.StoredProcedure).ToList();
 
-                return Ok(new { IsAuthenticated = true, UserName = userName, UserEmail = userEmail }); // 인증 상태와 사용자 정보를 함께 반환
-            } else {
-                return Ok(new { IsAuthenticated = false }); // 인증되지 않은 경우에도 JSON 반환
-                //return Ok(new { IsAuthenticated = true, UserName = "zzzz", UserEmail = "zzzz111" }); // 인증 상태와 사용자 정보를 함께 반환
+                var redirectUrl = "/home/index";
+
+                return Ok(new { IsAuthenticated = true, UserName = userName, UserEmail = userEmail, redirectUrl = redirectUrl }); // 인증 상태와 사용자 정보를 함께 반환
             }
-            //return View();
+            else
+            {
+                return Ok(new { IsAuthenticated = false }); // 인증되지 않은 경우에도 JSON 반환
+            }
         }
     }
 }

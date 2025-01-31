@@ -186,11 +186,11 @@
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                @if (User.Identity.IsAuthenticated) // 여기에서는 false로 떨어짐
                 {
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">@User.Identity.Name!</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">로그아웃</span>
                 }
                 else
                 {
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><a href="/Login/index">Login</a></span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><a href="/Login/index">로그인</a></span>
                 }
                 <img class="img-profile rounded-circle"
                      src="img/undraw_profile.svg">
